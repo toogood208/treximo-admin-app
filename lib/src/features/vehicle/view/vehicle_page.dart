@@ -13,9 +13,9 @@ class _VehiclePageState extends State<VehiclePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Manage your Rides'),
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Manage your Rides'),
+      // ),
       body: Center(
         child: ElevatedButton(
           child: const Text("add vehicles"),

@@ -5,6 +5,7 @@ import 'package:treximino_admin_app/src/features/user/view/user_page.dart';
 import 'package:treximino_admin_app/src/features/vehicle/view/add_vehicle_page.dart';
 import 'package:treximino_admin_app/src/features/vehicle/view/vehicle_page.dart';
 import 'package:treximino_admin_app/src/shared/go_router/route_constants.dart';
+import 'package:treximino_admin_app/src/shared/widgets/custom_app_bar.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellUsersNavigatorKey = GlobalKey<NavigatorState>();
@@ -93,12 +94,13 @@ class ScaffoldWithNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const CustomAppBar(),
       body: body,
       bottomNavigationBar: NavigationBar(
         selectedIndex: selectedIndex,
         destinations: const [
-          NavigationDestination(label: 'Section A', icon: Icon(Icons.home)),
-          NavigationDestination(label: 'Section B', icon: Icon(Icons.settings)),
+          NavigationDestination(label: 'Vehicles', icon: Icon(Icons.bike_scooter)),
+          NavigationDestination(label: 'Users', icon: Icon(Icons.person)),
         ],
         onDestinationSelected: onDestinationSelected,
       ),
@@ -120,6 +122,7 @@ class ScaffoldWithNavigationRail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const CustomAppBar(),
       body: Row(
         children: [
           NavigationRail(
