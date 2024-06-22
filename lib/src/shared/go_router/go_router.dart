@@ -21,6 +21,18 @@ final goRouter = GoRouter(
                 navigationShell: navigationShell);
           },
           branches: [
+             StatefulShellBranch(navigatorKey: _shellUsersNavigatorKey, routes: [
+              GoRoute(
+                  path: RouteConstants.userPath,
+                  pageBuilder: (context, state) =>
+                      const NoTransitionPage(child: UserPage()),
+                  routes: [
+                    GoRoute(
+                      path: RouteConstants.addUserPath,
+                      builder: (context, state) => const AddUsersPage(),
+                    )
+                  ])
+            ]),
             StatefulShellBranch(
                 navigatorKey: _shellVehiclesNavigatorKey,
                 routes: [
@@ -36,18 +48,7 @@ final goRouter = GoRouter(
                                 const NoTransitionPage(child: AddVehiclePage()))
                       ])
                 ]),
-            StatefulShellBranch(navigatorKey: _shellUsersNavigatorKey, routes: [
-              GoRoute(
-                  path: RouteConstants.userPath,
-                  pageBuilder: (context, state) =>
-                      const NoTransitionPage(child: UserPage()),
-                  routes: [
-                    GoRoute(
-                      path: RouteConstants.addUserPath,
-                      builder: (context, state) => const AddUsersPage(),
-                    )
-                  ])
-            ]),
+           
           ])
     ]);
 
@@ -95,11 +96,15 @@ class ScaffoldWithNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(),
-      body: body,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: body,
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: selectedIndex,
         destinations: const [
-          NavigationDestination(label: 'Vehicles', icon: Icon(Icons.bike_scooter)),
+          NavigationDestination(
+              label: 'Vehicles', icon: Icon(Icons.bike_scooter)),
           NavigationDestination(label: 'Users', icon: Icon(Icons.person)),
         ],
         onDestinationSelected: onDestinationSelected,
@@ -123,29 +128,49 @@ class ScaffoldWithNavigationRail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(),
-      body: Row(
-        children: [
-          NavigationRail(
-            selectedIndex: selectedIndex,
-            onDestinationSelected: onDestinationSelected,
-            labelType: NavigationRailLabelType.all,
-            destinations: const [
-              NavigationRailDestination(
-                label: Text('Vehicles'),
-                icon: Icon(Icons.bike_scooter),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Theme.of(context).colorScheme.surfaceContainer,
               ),
-              NavigationRailDestination(
-                label: Text('Users'),
-                icon: Icon(Icons.person),
+              child: NavigationRail(
+                selectedIndex: selectedIndex,
+                onDestinationSelected: onDestinationSelected,
+                extended: MediaQuery.of(context).size.width >= 650,
+                destinations: const [
+                  NavigationRailDestination(
+                    label: Text(
+                      'Staffs',
+                      style: TextStyle(fontSize: 24),
+                    ),
+                    icon: Icon(Icons.work),
+                  ),
+                  NavigationRailDestination(
+                    padding: EdgeInsets.zero,
+                    label: Text(
+                      'Vehicles',
+                      style: TextStyle(
+                        fontSize: 24,
+                      ),
+                    ),
+                    icon: Icon(Icons.bike_scooter, size: 24),
+                  ),
+                ],
               ),
-            ],
-          ),
-          const VerticalDivider(thickness: 1, width: 1),
-          // Main content on the right (end)
-          Expanded(
-            child: body,
-          ),
-        ],
+            ),
+            const SizedBox(
+              width: 16,
+            ),
+            Expanded(
+              child: body,
+            ),
+          ],
+        ),
       ),
     );
   }

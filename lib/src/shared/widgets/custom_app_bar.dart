@@ -23,7 +23,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
           ),
         ),
       ),
-      title: FittedBox(
+      title: const FittedBox(
         fit: BoxFit.scaleDown,
         child: Text("Jane S."),
       ),
