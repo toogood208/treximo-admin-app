@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:treximino_admin_app/src/features/authentication/login/view/login_page.dart';
+import 'package:treximino_admin_app/src/features/authentication/view/login_page.dart';
 import 'package:treximino_admin_app/src/features/user/view/add_users_page.dart';
 import 'package:treximino_admin_app/src/features/user/view/user_page.dart';
 import 'package:treximino_admin_app/src/features/vehicle/view/add_vehicle_page.dart';

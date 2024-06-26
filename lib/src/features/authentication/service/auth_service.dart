@@ -1,7 +1,7 @@
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:treximino_admin_app/src/shared/service/api_constant.dart';
 import 'package:treximino_admin_app/src/shared/service/api_service.dart';
-import 'package:treximino_admin_app/src/shared/service/network/netweork_exceptions.dart';
 
 class AuthService extends APIService {
   Future<Map<String, dynamic>> login(
@@ -11,8 +11,17 @@ class AuthService extends APIService {
           endPoint: ApiConstant.login,
           body: {'email': email, 'password': password});
       return res;
-    } on NetweorkExceptions catch (e) {
-      throw NetweorkExceptions.handleError(error: e);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<Map<String, dynamic>> loggedInUser({required String token}) async {
+    try {
+      final res = await get(endPoint: ApiConstant.loggedInUser, token: token);
+      return res;
+    } catch (e) {
+      throw e;
     }
   }
 }

@@ -30,6 +30,7 @@ class _UsersState extends State<UserPage> {
           final users = ref.watch(userNotifierProvider);
           return users.when(
             data: (data) {
+              print(data);
               return Column(
                 children: [
                   Row(
@@ -96,8 +97,9 @@ class _UsersState extends State<UserPage> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                            "${user.firstName} ${user.lastName}"),
-                                        Text(user.email ?? ''),
+                                            "${user.firstName} ${user.lastName}",
+                                            style: Theme.of(context).textTheme.bodyLarge,),
+                                        Text(user.email ?? '', style: Theme.of(context).textTheme.bodyLarge,),
                                       ],
                                     ),
                                     const Spacer(),
@@ -116,9 +118,9 @@ class _UsersState extends State<UserPage> {
                                     const CircleAvatar(
                                       child: Icon(Icons.person),
                                     ),
-                                    Text("${user.firstName} ${user.lastName}"),
-                                    Text(user.email ?? ''),
-                                    Text(user.phoneNumber ?? ''),
+                                    Text("${user.firstName} ${user.lastName}", style: Theme.of(context).textTheme.bodyLarge,),
+                                    Text(user.email ?? '', style: Theme.of(context).textTheme.bodyLarge,),
+                                    Text(user.phoneNumber ?? '', style: Theme.of(context).textTheme.bodyLarge,),
                                     ElevatedButton(
                                       onPressed: () {},
                                       child: const Text("edit"),

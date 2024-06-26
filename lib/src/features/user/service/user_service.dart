@@ -1,4 +1,4 @@
-import 'dart:convert';
+
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:treximino_admin_app/src/features/user/model/user.dart';
@@ -12,10 +12,10 @@ class UserService extends APIService {
       final response = await get(
           endPoint:
               '${ApiConstant.endPoint}${query != null ? '?search=$query' : ''}');
-      final user = json.decode(response.body);
-      return User.fromJson(user).data;
+
+      return User.fromJson(response).data;
     } on NetweorkExceptions catch (e) {
-      throw NetweorkExceptions.handleError(error: e);
+      throw NetweorkExceptions.handleError(statusCode: 100,error: e);
     }
   }
 }

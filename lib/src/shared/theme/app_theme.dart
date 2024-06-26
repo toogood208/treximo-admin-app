@@ -6,7 +6,7 @@ ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     textTheme: const TextTheme(
       displayLarge: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-      bodyLarge: TextStyle(fontSize: 18, color: Colors.black87),
+      bodyLarge: TextStyle(fontSize: 16, color: Colors.black87),
       titleLarge:  TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
       bodyMedium:  TextStyle(fontSize: 16, color: Colors.white),
     ),

@@ -1,7 +1,7 @@
 class NetweorkExceptions implements Exception {
   late String message;
 
-  static String handleError({int? statusCode, dynamic error}) {
+  static String handleError({required int statusCode, dynamic error}) {
     switch (statusCode) {
       case 400:
         return error['message'];

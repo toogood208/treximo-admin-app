@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
-import 'package:treximino_admin_app/src/features/authentication/login/notifier/login_notifier.dart';
-import 'package:treximino_admin_app/src/shared/go_router/route_constants.dart';
+import 'package:treximino_admin_app/src/features/authentication/notifier/login_notifier.dart';
 import 'package:treximino_admin_app/src/shared/service/field_validators.dart';
 import 'package:treximino_admin_app/src/shared/widgets/custom_button.dart';
 import 'package:treximino_admin_app/src/shared/widgets/custom_text_field.dart';
@@ -99,18 +97,22 @@ class _LoginPageState extends State<LoginPage> {
                     height: 30,
                   ),
                   Consumer(builder: (context, ref, child) {
-                    final login = ref.watch(loginNotifierProvider);
+                    final login = ref.watch(authNotifierProvider);
                     return Column(
                       children: [
                         if (login.isLoading) CircularProgressIndicator(),
                         SizedBox(height: 10),
+                        if (login.hasError)
+                          Text(
+                            login.error.toString(),
+                            style: TextStyle(color: Colors.redAccent),
+                          ),
                         CustomButton(
                           onPress: () {
                             if (_loginFormKey.currentState!.validate()) {
-                              ref.read(loginNotifierProvider.notifier).login(
+                              ref.read(authNotifierProvider.notifier).login(
                                   email: emailController.text,
                                   password: passwordController.text);
-                              context.go(RouteConstants.navigateToAddUser);
                             }
                           },
                           title: 'Enter',
